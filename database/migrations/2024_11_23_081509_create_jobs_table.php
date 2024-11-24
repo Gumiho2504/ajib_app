@@ -20,12 +20,13 @@ return new class extends Migration
             $table->string('work_model')->nullable();
             $table->string('type')->nullable();
             $table->string('level')->nullable();
-            $table->foreignId('requestment_id')->constrained('requestments');
-            $table->foreignId('skill_id')->constrained('skills');
+            $table->integer('open_count')->default(0);
+            $table->integer('apply_count')->default(0);
+            $table->dateTime('expired_at')->nullable(); // Fixed method name
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes(); // Use softDeletes for the deleted_at column
         });
     }
 
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job');
+        Schema::dropIfExists('jobs');
     }
 };

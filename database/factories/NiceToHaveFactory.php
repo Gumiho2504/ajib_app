@@ -2,14 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\NiceToHave;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use function Laravel\Prompts\text;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Skill>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\NiceToHave>
  */
-class SkillFactory extends Factory
+class NiceToHaveFactory extends Factory
 {
+    protected $model = NiceToHave::class;
     /**
      * Define the model's default state.
      *
@@ -18,7 +19,7 @@ class SkillFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->jobTitle,
+            'name' => $this->faker->name(),
         ];
     }
 }

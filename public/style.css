@@ -402,6 +402,7 @@ ul {
   }
 
   .feature-header h4 {
+
     margin: 0;
     padding: 0 10px; /* Optional padding for some spacing */
   }
@@ -499,9 +500,15 @@ ul {
     row-gap: 2px;
   }
   .job-box-title h5{
+      white-space: nowrap;        /* Prevent the text from wrapping to a new line */
+      overflow: hidden;           /* Hide any content that overflows the container */
+      text-overflow: ellipsis;
     margin: 0;
   }
   .job-box-title span{
+      white-space: nowrap;        /* Prevent the text from wrapping to a new line */
+      overflow: hidden;           /* Hide any content that overflows the container */
+      text-overflow: ellipsis;
     margin: 0;
     color: var(--text-color-80);
     font-size: var(--body-small);
@@ -637,6 +644,13 @@ ul {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
+    white-space: nowrap;        /* Prevent the text from wrapping to a new line */
+    overflow: hidden;           /* Hide any content that overflows the container */
+    text-overflow: ellipsis;
+}
+.latest-title h5{
+
+
 }
 .latest-job-info{
     display: flex;

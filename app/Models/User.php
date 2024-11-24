@@ -19,8 +19,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
+        'phone',
         'password',
     ];
 
@@ -47,8 +49,8 @@ class User extends Authenticatable
         ];
     }
     // ManyToMany
-    public function favourite_cars(): BelongsToMany
+    public function favourite_jobs(): BelongsToMany
     {
-        return $this->belongsToMany(Job::class, 'savejob', 'user_id', 'car_id');
+        return $this->belongsToMany(Job::class, 'savejob', 'user_id', 'job_id');
     }
 }

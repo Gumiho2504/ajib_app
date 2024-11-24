@@ -31,9 +31,11 @@
                 <div class="job-list">
                     <!-- job-box -->
 
-                   @for($i = 0; $i<8;$i++)
-                       <x-feature_job_box></x-feature_job_box>
-                   @endfor
+                   @foreach($jobs as $job)
+                        <x-feature_job_box :$job></x-feature_job_box>
+                   @endforeach
+
+
 
 
                 </div>
@@ -66,8 +68,11 @@
                 <x-slot:strong>Jobs open</x-slot>
             </x-section_title>
                 <div class="latest-job-list">
+                    @foreach($latestJobs as $latestJob)
+                        <x-latest_jobs_box :$latestJob></x-latest_jobs_box>
+                    @endforeach
                     @for($i=0;$i<8;$i++)
-                        <x-latest_jobs_box></x-latest_jobs_box>
+
                     @endfor
 
                 </div>

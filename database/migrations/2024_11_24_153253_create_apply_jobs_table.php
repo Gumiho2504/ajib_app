@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('requestments', function (Blueprint $table) {
+        Schema::create('apply_jobs', function (Blueprint $table) {
             $table->id();
-            $table->longText('name');
             $table->foreignId('job_id')->constrained('jobs');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reqestments');
+        Schema::dropIfExists('apply_jobs');
     }
 };

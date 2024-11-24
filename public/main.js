@@ -18,10 +18,9 @@ if (menuButton) {
 }
 
 
-
 // Dropdown toggle
 const locationElement = document.querySelector('.location');
-const locationLabal  = document.querySelector('.location-change')
+const locationLabal = document.querySelector('.location-change')
 const dropdown = document.querySelector('.dropdown');
 
 locationElement.addEventListener('click', () => {
@@ -43,3 +42,9 @@ document.addEventListener('click', (e) => {
         dropdown.classList.remove('active');
     }
 });
+
+
+function redirectToJob(jobId) {
+    window.location.href = '/job/' + jobId;  // Redirect to the route with the job ID
+}
+

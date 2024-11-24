@@ -14,6 +14,7 @@ class UserFactory extends Factory
     /**
      * The current password being used by the factory.
      */
+
     protected static ?string $password;
 
     /**
@@ -24,13 +25,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'fris_name' => fake()->firstname(),
+            'first_name' => fake()->firstname(),
             'last_name' => fake()->lastname(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'remember_token' => Str::random(10)
         ];
     }
 

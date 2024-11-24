@@ -22,17 +22,23 @@ class JobFactory extends Factory
      */
     public function definition()
     {
+        $publishedAt = $this->faker->optional(0.9)->dateTimeBetween('-1 month', 'now'); // 90% chance of a published date
+        $minSalary = $this->faker->numberBetween(100, 1000) * 10;
+        $maxSalary = $this->faker->numberBetween($minSalary + 100, $minSalary + 500);
+
         return [
             'title' => $this->faker->jobTitle,
             'description' => $this->faker->paragraph,
-            'min_salary' => $this->faker->numberBetween(30000, 50000),
-            'max_salary' => $this->faker->numberBetween(60000, 100000),
-            'work_model' => $this->faker->randomElement(['remote', 'onsite', 'hybrid']),
-            'type' => $this->faker->randomElement(['full-time', 'part-time', 'contract']),
-            'level' => $this->faker->randomElement(['junior', 'mid', 'senior']),
-            'requestment_id' => null, // Replace with actual logic if required
-            'skill_id' => null,      // Replace with actual logic if required
-            'company_id' => Company::factory(), // Create a company and associate
+            'min_salary' => $minSalary,
+            'max_salary' => $maxSalary,
+            'work_model' => $this->faker->randomElement(['Remote', 'Onsite', 'Hybrid']),
+            'type' => $this->faker->randomElement(['Full-Time', 'Part-Time', 'Contract']),
+            'level' => $this->faker->randomElement(['Junior', 'Mid', 'Senior']),
+            'open_count' => $this->faker->numberBetween(0, 20),
+            'apply_count' => $this->faker->numberBetween(0, 0),
+            'expired_at' => $publishedAt ? $this->faker->dateTimeBetween($publishedAt, $publishedAt->modify('+30 days')) : null,
+            'company_id' => Company::factory(), // Automatically create and link a Company
+            'published_at' => $publishedAt,
         ];
     }
 }

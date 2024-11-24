@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Skill extends Model
+class NiceToHave extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
-        'job_id',
-    ];
+    protected $table = 'nice_to_have';
+    protected $fillable = ['name'];
     public $timestamps = false;
 
-
-
+    public function job():BelongsTo{
+        return $this->belongsTo(Job::class);
+    }
 }

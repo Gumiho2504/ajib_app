@@ -1,22 +1,29 @@
-<div class="job-box">
-    <div class="job-box-header">
-        <div class="c-logo">
-            <img src="assets/logo.png" alt="">
-        </div>
-        <div class="small-button">
-            Full Time
-        </div>
-    </div>
-    <div class="job-box-title">
-        <h5>Email Marketing</h5>
-        <span>Revolut - Madrid, Spain</span>
-    </div>
+@props(["job"])
+<div onclick="redirectToJob({{$job->id}})" class="job-box">
 
-    <div class="job-box-des">Revolut is looking for Email Marketing to help team ma ...</div>
 
-    <div class="job-type-list">
-        <h4 class="job-type">
-            Marketing
-        </h4>
-    </div>
+        <div class="job-box-header" >
+            <div class="c-logo">
+                <img src="assets/logo.png" alt="">
+            </div>
+            <div class="small-button">
+                {{$job->type}}
+            </div>
+        </div>
+
+        <div class="job-box-title">
+            <h5>{{$job->title}}</h5>
+            <span>{{$job->company->name}} - {{\Illuminate\Support\Str::words($job->company->address, 5)}}</span>
+        </div>
+
+        <div class="job-box-des"> {{ \Illuminate\Support\Str::limit($job->description, 50) }}</div>
+
+        <div class="job-type-list">
+            <h4 class="job-type">
+                Marketing
+            </h4>
+        </div>
+
 </div>
+
+

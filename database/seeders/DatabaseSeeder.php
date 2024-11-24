@@ -3,10 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Company;
+use App\Models\Func;
 use App\Models\Job;
-use App\Models\Skill;
+use App\Models\NiceToHave;
+use App\Models\Requestment;
+use App\Models\Responsibility;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,9 +18,44 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //Skill::factory()->count(10)->create();
-        // User::factory(10)->create();
-  Company::factory()->count(10)->create();
-//        Job::factory()->count(10)->create();
+        // Seed funcs
+       //Func::factory()->count(10)->create();
+
+        // Seed companies with jobs
+        Company::factory()
+            ->count(2)
+            ->has(
+                Job::factory()
+                    ->count(2)
+                    ->has(Requestment::factory()->count(2))
+                    ->has(Responsibility::factory()->count(3))
+                    ->has(NiceToHave::factory()->count(3))
+                ->has(Func::factory()->count(2),'job_functions')
+            )
+            ->create();
+
+        // Uncomment and add logic for other seeders if needed
+        // Seed jobs with skills and requirements
+        // Job::factory()
+        //     ->count(10)
+        //     ->has(Skill::factory()->count(10)) // Link skills to jobs
+        //     ->has(Requestment::factory()->count(10)) // Add requirements
+        //     ->create();
+
+        // Seed users
+        // User::factory()
+        //     ->count(3)
+        //     ->create();
+
+        // Seed users with jobs and companies
+         User::factory()
+             ->count(3)
+             ->has(
+                 Job::factory()
+                     ->count(10)
+                     ->for(Company::factory()), // Associate jobs with a company
+                 'favourite_jobs'
+             )
+             ->create();
     }
 }

@@ -20,8 +20,9 @@ class Job extends Model
         'work_model',
         'type',
         'level',
-        'requestment_id',
-        'skill_id',
+        'open_count',
+        'apply_count',
+        'expired_at',
         'company_id',
     ];
 
@@ -31,10 +32,7 @@ class Job extends Model
     }
 
 
-    public function skills():HasMany
-    {
-        return $this->hasMany(Skill::class, 'job_skill');
-    }
+
 
     // many to one
     public function company() : BelongsTo
@@ -42,8 +40,27 @@ class Job extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function responsibilities() : HasMany
+    {
+        return $this->hasMany(Responsibility::class);
+    }
+
+    public function nicetohaves() : HasMany{
+        return $this->hasMany(NiceToHave::class,'job_id');
+    }
+
+    public function job_functions(): BelongsToMany
+    {
+        return $this->belongsToMany(Func::class, 'job_functions', 'job_id', 'func_id');
+    }
+
+
+    public function apply_users() : BelongsToMany{
+        return $this->belongsToMany(User::class,'apply_jobs','job_id','user_id');
+    }
+
     public function favourite_users(): BelongsToMany
     {
-        return $this->belongsToMany(Job::class, 'savejob', 'car_id', 'user_id');
+        return $this->belongsToMany(Job::class, 'savejob', 'job_id', 'user_id');
     }
 }

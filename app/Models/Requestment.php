@@ -10,10 +10,11 @@ class Requestment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name'
+        'name',
+        'job_id',
     ];
     public $timestamps = false;
-    public function jobs() :BelongsTo{
+    public function job() :BelongsTo{
         return $this->belongsTo(Job::class);
     }
 
