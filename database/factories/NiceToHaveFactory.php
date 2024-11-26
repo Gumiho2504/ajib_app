@@ -18,8 +18,31 @@ class NiceToHaveFactory extends Factory
      */
     public function definition(): array
     {
+        $skills = [
+        'Programming',
+        'Web Development',
+        'Database Management',
+        'Data Analysis',
+        'Project Management',
+        'Mobile App Development',
+        'UI/UX Design',
+        'Graphic Design',
+        'Content Writing',
+        'SEO Optimization',
+        'Digital Marketing',
+        'Cloud Computing',
+        'Cybersecurity',
+        'Network Administration',
+        'Game Development',
+        'Machine Learning',
+        'DevOps',
+        'Blockchain Development',
+        'Quality Assurance (QA)',
+        'Technical Writing',
+    ];
+
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->randomElement($skills),
         ];
     }
 }

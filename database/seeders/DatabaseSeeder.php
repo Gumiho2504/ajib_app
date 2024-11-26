@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\City;
 use App\Models\Company;
+use App\Models\District;
 use App\Models\Func;
 use App\Models\Job;
 use App\Models\NiceToHave;
@@ -18,48 +20,141 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seed funcs
-       //Func::factory()->count(10)->create();
+        $cities = [
+            'Phnom Penh' => [
+                'Chamkar Mon', // ចំការមន
+                'Toul Kork', // ទួលគោក
+                'Russey Keo', // ឬស្សីកែវ
+                'Dangkao', // ដង្កោ
+                'Chbar Ampov', // ច្បារអំពៅ
+                'Sen Sok', // សែនសុខ
+                'Por Sen Chey', // ពោធិ៍សែនជ័យ
+                'Mean Chey', // មានជ័យ
+                'Prampir Makara', // ប្រាំពីរ មករា
+                'Daun Penh', // ដូនពេញ
+            ],
+            'Battambang' => [
+                'Svay Por', // ស្វាយពោធិ៍
+                'Chamkar Samraong', // ចំការសំរោង
+                'O Mal', // អូរមាល
+                'Sangkae', // សង្កែ
+                'Wat Kor', // វត្តគរ
+            ],
+            'Siem Reap' => [
+                'Svay Dangkum', // ស្វាយដង្គំ
+                'Sala Kamraeuk', // សាលាកំរើក
+                'Sla Kram', // ស្លក្រាម
+                'Kok Chak', // កុកចក
+                'Chreav', // ជ្រាវ
+            ],
+            'Kampot' => [
+                'Andoung Khmer', // អណ្តូងខ្មែរ
+                'Kampong Bay', // កំពង់បាយ
+                'Traeuy Kaoh', // ត្រួយកោះ
+                'Tuek Chhou', // ទឹកឈូ
+            ],
+            'Kandal' => [
+                'Ta Khmau', // តាខ្មៅ
+                'Kien Svay', // កៀនស្វាយ
+                'Sithor', // សិទ្ធរ
+                'Saang', // សាំង
+                'Ponhea Lueu', // ពញាឮ
+            ],
+            'Preah Sihanouk' => [
+                'Buon', // បួន
+                'Kampong Seila', // កំពង់សីលា
+                'Ou Chrov', // អូរជ្រៅ
+                'Prey Nob', // ព្រៃនប់
+            ],
+            'Kratie' => [
+                'Kratie Municipality', // ក្រុងក្រចេះ
+                'Sambour', // សំបូរ
+                'Prek Prasap', // ព្រែកប្រាសាទ
+                'Chhloung', // ឆ្លូង
+                'Snoul', // ស្នួល
+            ],
+            'Takeo' => [
+                'Doun Kaev', // ដូនកែវ
+                'Prey Kabas', // ព្រៃកបាស
+                'Kiri Vong', // គិរីវង់
+                'Bati', // បាទី
+                'Samraong', // សំរោង
+            ],
+        ];
+        foreach ($cities as $city => $districts) {
+            City::factory()
+                ->state(
+                    ['name' => $city]
+                )
+                ->has(
+                    District::factory()
+                        ->count(count($districts))
+                        ->sequence(
+                            ...array_map(fn($district) => ['name' => $district], $districts)
+                        )
+                )
+                ->create();
+        }
+
 
         // Seed companies with jobs
+
         Company::factory()
-            ->count(2)
-            ->has(
-                Job::factory()
-                    ->count(1)
-                    ->has(Requestment::factory()->count(2))
-                    ->has(Responsibility::factory()->count(2))
-                    ->has(NiceToHave::factory()->count(2))
-                ->has(Func::factory()->count(1),'job_functions')
-            )
+            ->count(10)
             ->create();
 
-        // Uncomment and add logic for other seeders if needed
-        // Seed jobs with skills and requirements
-        // Job::factory()
-        //     ->count(10)
-        //     ->has(Skill::factory()->count(10)) // Link skills to jobs
-        //     ->has(Requestment::factory()->count(10)) // Add requirements
-        //     ->create();
+        // job function
+        $funcs =[
+            'Marketing',
+            'Design',
+            'Developer',
+            'Sale',
+            'Business',
+            'Finance',
+            'Technology',
+            'Engineering',
+            'Human Resources',
+        ];
+        foreach ($funcs as $func) {
+            Func::factory()->sequence(
+                ['name' => $func],
+            )->create();
+        }
 
-        // Seed users
-        // User::factory()
-        //     ->count(3)
-        //     ->create();
+        User::factory()->count(2)->create();
 
-        // Seed users with jobs and companies
-         User::factory()
-             ->count(1)
-             ->has(
-                 Job::factory()
-                     ->count(2)
+        Job::factory()
+                     ->count(20)
                      ->has(Requestment::factory()->count(2))
                      ->has(Responsibility::factory()->count(1))
                      ->has(NiceToHave::factory()->count(1))
-                     ->has(Func::factory()->count(2),'job_functions')
-                    ->for(Company::factory())
-                 ,'favourite_jobs'
-             )
-             ->create();
+            ->create()
+        ->each(function ($job)  {
+                // Attach random existing functions to each job
+                $job->job_functions()->attach(
+                    Func::all()->random(2)->pluck('id')->toArray() // Attach 2 random functions to each job
+                );
+            });
+
+        // Seed users with jobs and companies
+         User::factory()
+             ->count(5)
+             ->create()
+         ->each(function ($user)  {
+             $user->favourite_jobs()->attach(
+                 Job::all()->random(2)->pluck('id')->toArray()
+             );
+         })
+         ->each(function ($user)  {
+             $jobs = Job::all()->random(random_int(1,4));
+             $user->apply_jobs()->attach(
+                $jobs->pluck('id')->toArray()
+             );
+             foreach ($jobs as $job) {
+                 $job->apply_count = (int) $job->apply_count; // Cast it to an integer
+                 $job->apply_count += 1;
+                 $job->save();
+             }
+         });
     }
 }

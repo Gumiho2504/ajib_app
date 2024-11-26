@@ -2,36 +2,6 @@
 
 <x-base-layout>
     <x-header-layout/>
-    {{--    <div>--}}
-    {{--        <h4>{{$job->title}}</h4>--}}
-    {{--        <h5>{{$job->description}}</h5>--}}
-    {{--        <div>--}}
-    {{--            <span>{{$job->min_salary}}</span>--}}
-    {{--            ---}}
-    {{--            <span>{{$job->max_salary}}</span>--}}
-    {{--        </div>--}}
-    {{--        <h5>{{$job->type}}</h5>--}}
-    {{--        <h4>requestment</h4>--}}
-    {{--        <h4>Open {{$job->open_count}}</h4>--}}
-    {{--        <ul>--}}
-
-
-    {{--        </ul>--}}
-    {{--        <h4>responsibilities</h4>--}}
-    {{--        <ul>--}}
-
-
-    {{--        </ul>--}}
-    {{--        <h4>skill request</h4>--}}
-    {{--        <ul>--}}
-
-    {{--        </ul>--}}
-    {{--        <h5>request</h5>--}}
-    {{--        <span>about -{{$job->company->description}}</span>--}}
-    {{--        <h5>company - {{$job->company->name}}</h5>--}}
-    {{--        <h4>address - {{$job->company->address}}</h4>--}}
-    {{--        <h4>phone - {{$job->company->phone}}}</h4>--}}
-    {{--    </div>--}}
 
         <div class="job-detail-header-box">
 
@@ -42,7 +12,9 @@
                         </div>
                         <div class="job-deatail-title">
                             <h5>{{$job->title}}</h5>
-                            <a>{{$job->company->name}} - Paris, France - {{$job->type}}</a>
+                            <a>{{$job->company->name}}
+                                - {{$job->company->district->city->name}},
+                                {{$job->company->district->name}} - {{$job->type}}</a>
                         </div>
                     </div>
 
@@ -107,9 +79,11 @@
                         <div class="about-the-post">
                             <h5>ABOUT THE POST</h5>
                             <div class="progress-box">
-                                <p>{{$job->apply_count}} applied <span>/ {{$job->open_count}} open</span></p>
+                                <p>{{$job->apply_users->count()}} applied <span>/ {{$job->open_count}} open</span></p>
                                 <div class="progress-bar">
-                                    <div class="inner-progress-bar"></div>
+                                    <div class="inner-progress-bar"
+                                         style="width: {{ $job->apply_users->count() / $job->open_count * 100 }}%">
+                                    </div>
                                 </div>
                             </div>
                             <div class="the-post-box">
@@ -130,7 +104,7 @@
                             </div>
                             <div class="the-post-box">
                                 <p class="title">Location</p>
-                                <p class="value">Phnom Penh , Cambodia</p>
+                                <p class="value">{{$job->company->district->city->name}} , {{$job->company->district->name}}</p>
                             </div>
                             <div class="the-post-box">
                                 <p class="title">Salary</p>

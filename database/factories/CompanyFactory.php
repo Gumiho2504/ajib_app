@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Company;
+use App\Models\District;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,6 +24,7 @@ class CompanyFactory extends Factory
             'description' => $this->faker->catchPhrase,
             'address' => $this->faker->address,
             'phone' => $this->faker->phoneNumber,
+            'district_id' => District::inRandomOrder()->first()
         ];
     }
 }

@@ -1,12 +1,12 @@
 @props(["latestJob"])
 <div onclick="redirectToJob({{$latestJob->id}})" class="latest-job-box">
     <div class="company-logo">
-        <img src="assets/logo.png" alt="">
+        <img src="/assets/logo.png" alt="">
     </div>
     <div class="latest-title">
         <h5>{{$latestJob->title}}</h5>
         <div class="company-location">
-            {{$latestJob->company->name}}. {{$latestJob->company->address}}
+            {{$latestJob->company->name}}. {{$latestJob->company->district->city->name}} {{$latestJob->company->district->name}}
         </div>
         <div class="latest-job-info">
             <div class="label">

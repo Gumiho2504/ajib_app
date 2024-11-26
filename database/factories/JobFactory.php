@@ -37,7 +37,7 @@ class JobFactory extends Factory
             'open_count' => $this->faker->numberBetween(0, 20),
             'apply_count' => $this->faker->numberBetween(0, 0),
             'expired_at' => $publishedAt ? $this->faker->dateTimeBetween($publishedAt, $publishedAt->modify('+30 days')) : null,
-            'company_id' => Company::factory(), // Automatically create and link a Company
+            'company_id' => Company::inRandomOrder()->first(), // Automatically create and link a Company
             'published_at' => $publishedAt,
         ];
     }

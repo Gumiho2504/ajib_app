@@ -52,9 +52,11 @@
                 </x-section_title>
                 <div class="job-by-function-list">
 
-                   @for($i=0;$i<8;$i++)
-                       <x-job_function_box></x-job_function_box>
-                   @endfor
+                 @foreach($funcs as $func)
+                        <x-job_function_box :$func></x-job_function_box>
+                 @endforeach
+
+
 
                 </div>
             </div>

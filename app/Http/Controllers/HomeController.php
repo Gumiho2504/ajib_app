@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Func;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,9 +28,14 @@ class HomeController extends Controller
 //            'password' => "qwe123",
 //        ]);
 //        dd($user);
-
+    $funcs = Func::all();
+    dump($funcs);
         // Return the view with the data
-        return view('home', ['jobs' => $jobs, 'latestJobs' => $latestJobs]);
+        return view('home', [
+            'jobs' => $jobs,
+            'latestJobs' => $latestJobs,
+            'funcs' => $funcs
+        ]);
     }
 
 }

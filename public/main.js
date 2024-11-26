@@ -47,4 +47,7 @@ document.addEventListener('click', (e) => {
 function redirectToJob(jobId) {
     window.location.href = '/job/' + jobId;  // Redirect to the route with the job ID
 }
+function redirect(route) {
+    window.location.href = '/' + route;  // Redirect to the route with the job ID
+}
 

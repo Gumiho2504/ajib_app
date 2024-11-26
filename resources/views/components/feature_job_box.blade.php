@@ -13,14 +13,15 @@
 
         <div class="job-box-title">
             <h5>{{$job->title}}</h5>
-            <span>{{$job->company->name}} - {{\Illuminate\Support\Str::words($job->company->address, 5)}}</span>
+            <span>{{$job->company->name}} - {{$job->company->district->city->name}} {{$job->company->district->name}}</span>
         </div>
 
-        <div class="job-box-des"> {{ \Illuminate\Support\Str::limit($job->description, 50) }}</div>
+        <div class="job-box-des"> {{ \Illuminate\Support\Str::limit($job->description, 50) }} ...</div>
 
         <div class="job-type-list">
+
             <h4 class="job-type">
-                Marketing
+                {{$job->job_functions[0]->name}}
             </h4>
         </div>
 

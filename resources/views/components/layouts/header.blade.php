@@ -9,7 +9,7 @@
         <div class="nav-button">
             <ul class="nav-list">
                 <li>
-                    <a href="job.html" class="nav-link">Jobs</a>
+                    <a href="{{route('job.index')}}" class="nav-link">Jobs</a>
                 </li>
                 <li>
                     <a href="company.html" class="nav-link">Companies</a>
