@@ -26,11 +26,11 @@ class DatabaseSeeder extends Seeder
             ->count(2)
             ->has(
                 Job::factory()
-                    ->count(2)
+                    ->count(1)
                     ->has(Requestment::factory()->count(2))
-                    ->has(Responsibility::factory()->count(3))
-                    ->has(NiceToHave::factory()->count(3))
-                ->has(Func::factory()->count(2),'job_functions')
+                    ->has(Responsibility::factory()->count(2))
+                    ->has(NiceToHave::factory()->count(2))
+                ->has(Func::factory()->count(1),'job_functions')
             )
             ->create();
 
@@ -49,12 +49,16 @@ class DatabaseSeeder extends Seeder
 
         // Seed users with jobs and companies
          User::factory()
-             ->count(3)
+             ->count(1)
              ->has(
                  Job::factory()
-                     ->count(10)
-                     ->for(Company::factory()), // Associate jobs with a company
-                 'favourite_jobs'
+                     ->count(2)
+                     ->has(Requestment::factory()->count(2))
+                     ->has(Responsibility::factory()->count(1))
+                     ->has(NiceToHave::factory()->count(1))
+                     ->has(Func::factory()->count(2),'job_functions')
+                    ->for(Company::factory())
+                 ,'favourite_jobs'
              )
              ->create();
     }

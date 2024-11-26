@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,8 +17,16 @@ class HomeController extends Controller
         $latestJobs = Job::latest()->limit(8)->get();
 
         // Debugging output (dump the results)
-        dump($latestJobs);
-        dump($jobs);
+//        dump($latestJobs);
+//        dump($jobs);
+//        $user = User::create([
+//            'first_name' => "metrety",
+//            'last_name' => "metrety",
+//            'email' => "metrety@",
+//            'phone' => "1234567890",
+//            'password' => "qwe123",
+//        ]);
+//        dd($user);
 
         // Return the view with the data
         return view('home', ['jobs' => $jobs, 'latestJobs' => $latestJobs]);

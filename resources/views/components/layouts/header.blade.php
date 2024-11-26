@@ -2,8 +2,8 @@
     <div class="nav container">
 
         <div class="nav-menu">
-            <a href="#" class="nav-logo">
-                <img src="assets/logo.png" alt="" class="logo">
+            <a href="{{route('home')}}" class="nav-logo">
+                <img src="/assets/logo.png" alt="" class="logo">
             </a>
         </div>
         <div class="nav-button">
@@ -17,11 +17,11 @@
             </ul>
             <ul class="nav-list-button">
                 <li>
-                    <a href="#" class="nav-link-button">Login</a>
+                    <a href="/login" class="nav-link-button">Login</a>
                 </li>
                 <div class="bar"></div>
                 <li>
-                    <a href="#" class="nav-link-button">Sign up</a>
+                    <a href="/signup" class="nav-link-button">Sign up</a>
                 </li>
             </ul>
         </div>
@@ -36,7 +36,7 @@
     <div class="menu-mobile container" id="menu-mobile">
         <div class="nav-box"><a href="job.html" class="a">Jobs</a></div>
         <div class="nav-box"><a href="company.html" class="a">Companies</a></div>
-        <div class="nav-box"><a href="#" class="a">Login</a></div>
-        <div class="nav-box"><a href="#" class="a">Sign up</a></div>
+        <div class="nav-box"><a href="/login" class="a">Login</a></div>
+        <div class="nav-box"><a href="/signup" class="a">Sign up</a></div>
     </div>
 </header>

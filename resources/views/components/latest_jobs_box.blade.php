@@ -13,12 +13,20 @@
                 {{$latestJob->type}}
             </div>
             <div class="bar"></div>
-            <div class="label-marketing">
-                Marketing
-            </div>
-            <div class="label-design">
-                Disign
-            </div>
+            @for($i = 0; $i < $latestJob->job_functions->count(); $i++)
+                @if($i == 0)
+                    <div class="label-marketing">
+                        {{ $latestJob->job_functions[$i]->name }}
+                    </div>
+                @else
+                    <div class="label-design">
+                        {{ $latestJob->job_functions[$i]->name }}
+                    </div>
+                @endif
+
+
+            @endfor
+
         </div>
     </div>
 </div>

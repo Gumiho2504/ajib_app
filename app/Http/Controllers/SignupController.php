@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class JobController extends Controller
+class SignupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +21,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        return view('job.create');
+        return view('auth.signup');
     }
 
     /**
@@ -28,30 +29,33 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate input data
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'salary' => 'required|numeric|min:0',
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required|digits:10|unique:users,phone',
+            'password' =>  'required|string|min:8',
         ]);
 
-        // Create the job
-        Job::create($validatedData);
+        // Create user
+    User::create([
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'password' => Hash::make($validated['password']),
+        ]);
 
-        // Redirect with success message
-        return redirect()->route('job.index')->with('success', 'Job created successfully!');
 
+        return redirect()->route('home')->with('success', 'Registration Successful');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Job $job)
+    public function show(string $id)
     {
-//        dump($job);
-//        dump($job->requestments);
-        return view('job.show',['job'=>$job]);
+        //
     }
 
     /**

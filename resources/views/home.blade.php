@@ -71,9 +71,6 @@
                     @foreach($latestJobs as $latestJob)
                         <x-latest_jobs_box :$latestJob></x-latest_jobs_box>
                     @endforeach
-                    @for($i=0;$i<8;$i++)
-
-                    @endfor
 
                 </div>
             </div>
