@@ -1,7 +1,7 @@
 
 
-<x-base-layout>
-    <x-header-layout/>
+<x-base-layout title="Jobs">
+    <x-header-layout active_name="jobs"/>
 
         <div class="job-detail-header-box">
 

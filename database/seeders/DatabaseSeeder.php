@@ -81,6 +81,7 @@ class DatabaseSeeder extends Seeder
                 'Samraong', // សំរោង
             ],
         ];
+
         foreach ($cities as $city => $districts) {
             City::factory()
                 ->state(
@@ -100,34 +101,49 @@ class DatabaseSeeder extends Seeder
         // Seed companies with jobs
 
         Company::factory()
-            ->count(10)
+            ->count(50)
             ->create();
 
         // job function
-        $funcs =[
-            'Marketing',
-            'Design',
-            'Developer',
-            'Sale',
-            'Business',
-            'Finance',
-            'Technology',
-            'Engineering',
-            'Human Resources',
+        $icon = [
+            "ri-arrow-right-line", // design
+            "ri-bar-chart-2-fill",  //sale
+            "ri-megaphone-fill",  // marketing
+            "ri-code-s-slash-fill",  // developer
+            "ri-macbook-line", // technology
+            "ri-bank-fill", //finance
+            "ri-briefcase-line", //business
+            "ri-team-line",  // human resource
+
         ];
-        foreach ($funcs as $func) {
+        $funcs =[
+            'Design' => 'ri-pencil-ruler-2-line',
+            'Marketing' => 'ri-megaphone-fill',
+//            'Developer',
+            'Sale' => 'ri-bar-chart-2-fill',
+            'Business' => 'ri-briefcase-line',
+            'Finance' => 'ri-bank-fill',
+            'Technology' => 'ri-macbook-line',
+            'Engineering' => 'ri-code-s-slash-fill',
+            'Human Resources' => 'ri-team-line',
+        ];
+        foreach ($funcs as $func =>$icon) {
             Func::factory()->sequence(
-                ['name' => $func],
-            )->create();
+                    ['name' => $func],
+            )
+                ->sequence(
+                    ['icon' => $icon],
+                )
+                ->create();
         }
 
         User::factory()->count(2)->create();
 
         Job::factory()
-                     ->count(20)
-                     ->has(Requestment::factory()->count(2))
-                     ->has(Responsibility::factory()->count(1))
-                     ->has(NiceToHave::factory()->count(1))
+                     ->count(100)
+                     ->has(Requestment::factory()->count(random_int(1,3)))
+                     ->has(Responsibility::factory()->count(random_int(1,5)))
+                     ->has(NiceToHave::factory()->count(random_int(1,3)))
             ->create()
         ->each(function ($job)  {
                 // Attach random existing functions to each job
@@ -146,7 +162,8 @@ class DatabaseSeeder extends Seeder
              );
          })
          ->each(function ($user)  {
-             $jobs = Job::all()->random(random_int(1,4));
+             $jobs = Job::all()->random(2);
+
              $user->apply_jobs()->attach(
                 $jobs->pluck('id')->toArray()
              );

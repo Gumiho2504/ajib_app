@@ -34,7 +34,7 @@ class JobFactory extends Factory
             'work_model' => $this->faker->randomElement(['Remote', 'Onsite', 'Hybrid']),
             'type' => $this->faker->randomElement(['Full-Time', 'Part-Time', 'Contract']),
             'level' => $this->faker->randomElement(['Junior', 'Mid', 'Senior']),
-            'open_count' => $this->faker->numberBetween(0, 20),
+            'open_count' => $this->faker->numberBetween(1, 20),
             'apply_count' => $this->faker->numberBetween(0, 0),
             'expired_at' => $publishedAt ? $this->faker->dateTimeBetween($publishedAt, $publishedAt->modify('+30 days')) : null,
             'company_id' => Company::inRandomOrder()->first(), // Automatically create and link a Company

@@ -14,8 +14,10 @@ Route::post('/signup', [\App\Http\Controllers\SignupController::class, 'store'])
 Route::get('/login', [\App\Http\Controllers\LoginController::class, 'create'])->name('login');
 
 Route::get('/home',[HomeController::class,'index'])->name('home');
-
+Route::get('/job/search/{cityName}', [JobController::class, 'search'])->name('job.search');
 Route::resource('job',JobController::class);
 Route::resource('user',UserController::class);
 
 Route::get('/func/{func}',[\App\Http\Controllers\FuncController::class,'show']);
+
+Route::get('/company',[\App\Http\Controllers\CompanyController::class,'index'])->name('company.index');

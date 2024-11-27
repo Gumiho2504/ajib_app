@@ -1,7 +1,7 @@
 @props(['func'])
 <div class="function-box" onclick="redirect('func/{{$func->id}}')">
     <div class="function-icon">
-        <i class="ri-pencil-ruler-2-line"></i>
+        <i class="{{$func->icon}}"></i>
     </div>
     <div class="function-title">
         <h5>

@@ -31,6 +31,7 @@ class FuncFactory extends Factory
                 'Engineering',
                 'Human Resources',
             ]),
+            'icon' => $this->faker->name
             // Optionally include other fields like 'job_id' if needed
         ];
     }

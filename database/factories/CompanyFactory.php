@@ -22,6 +22,16 @@ class CompanyFactory extends Factory
         return [
             'name' => $this->faker->company,
             'description' => $this->faker->catchPhrase,
+            'type' => $this->faker->randomElement(["Technology",
+                "Healthcare",
+                "Finance",
+                "Retail",
+                "Education",
+                "Manufacturing",
+                "Real Estate",
+                "Hospitality",
+                "Transportation",
+                "Entertainment"]),
             'address' => $this->faker->address,
             'phone' => $this->faker->phoneNumber,
             'district_id' => District::inRandomOrder()->first()

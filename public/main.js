@@ -27,12 +27,12 @@ locationElement.addEventListener('click', () => {
     dropdown.classList.toggle('active');
 });
 
-// Selecting a location
+
 const dropdownItems = document.querySelectorAll('.dropdown li');
 dropdownItems.forEach(item => {
     item.addEventListener('click', () => {
-        locationLabal.textContent = item.textContent; // Update location text
-        dropdown.classList.remove('active'); // Close dropdown
+        locationLabal.textContent = item.textContent;
+        dropdown.classList.remove('active');
     });
 });
 

@@ -1,3 +1,4 @@
+@props(['cities','searchCity' => ''])
 <div class="search-box">
     <!-- Search Icon -->
 
@@ -12,18 +13,30 @@
         <div class="location">
             <i class="ri-map-pin-2-fill"></i>
             <div class="location-change">
-                Phnom Penh
+                {{$searchCity}}
             </div>
 
         </div>
         <ul class="dropdown">
-            <li>Phnom Penh</li>
-            <li>Siem Reap</li>
-            <li>Sihanoukville</li>
-            <li>Battambang</li>
+            @foreach($cities as $city)
+                <li>{{$city->name}}</li>
+            @endforeach
+
         </ul>
     </div>
 
     <!-- Search Button -->
-    <button>Search for job</button>
+    <button onclick="searchJobs()">Search for job</button>
 </div>
+<script>
+
+    // function updateSearchCity(cityName) {
+    //     document.querySelector('.location-change').textContent = cityName;
+    // }
+
+    function searchJobs() {
+        const cityName = document.querySelector('.location-change').textContent;
+        const url = '/job/search/'+cityName
+        window.location.href = url;
+    }
+</script>

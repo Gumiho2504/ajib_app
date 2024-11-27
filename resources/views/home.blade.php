@@ -1,4 +1,4 @@
-<x-base-layout>
+<x-base-layout title="Home">
     <x-header-layout></x-header-layout>
     <main>
         <!-- banner title-->
@@ -11,7 +11,7 @@
                     <h5 class="banner-des">
                         Great platform that allow job seekers and recruiters to meet and match their talent !
                     </h5>
-                    <x-search></x-search>
+                    <x-search :$cities></x-search>
                 </div>
                 <div class="banner-img">
                     <img src="assets/girls.png" alt="">

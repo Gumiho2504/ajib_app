@@ -1,3 +1,4 @@
+@props(['active_name' => ''])
 <header>
     <div class="nav container">
 
@@ -9,10 +10,21 @@
         <div class="nav-button">
             <ul class="nav-list">
                 <li>
-                    <a href="{{route('job.index')}}" class="nav-link">Jobs</a>
+                    <a href="{{route('job.index')}}" @if($active_name == 'jobs')
+                            class="nav-link-active"
+                    @else
+                        class = "nav-link"
+                    @endif
+                    >Jobs</a>
                 </li>
                 <li>
-                    <a href="company.html" class="nav-link">Companies</a>
+                    <a href="{{route('company.index')}}"
+                       @if($active_name == 'company')
+                           class="nav-link-active"
+                       @else
+                           class = "nav-link"
+                        @endif
+                    >Companies</a>
                 </li>
             </ul>
             <ul class="nav-list-button">
@@ -34,8 +46,8 @@
 
     </div>
     <div class="menu-mobile container" id="menu-mobile">
-        <div class="nav-box"><a href="job.html" class="a">Jobs</a></div>
-        <div class="nav-box"><a href="company.html" class="a">Companies</a></div>
+        <div class="nav-box"><a href="{{route('job.index')}}" class="a">Jobs</a></div>
+        <div class="nav-box"><a href="{{route('company.index')}}" class="a">Companies</a></div>
         <div class="nav-box"><a href="/login" class="a">Login</a></div>
         <div class="nav-box"><a href="/signup" class="a">Sign up</a></div>
     </div>

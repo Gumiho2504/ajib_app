@@ -1,4 +1,4 @@
-<x-base-layout>
+<x-base-layout title="Jobs">
     <h1>Create a New Job</h1>
 
     <!-- Display Validation Errors -->

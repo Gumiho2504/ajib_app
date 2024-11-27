@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',44);
             $table->longText('description');
+            $table->string('type',50);
             $table->string('address',255)->unique();
             $table->string('phone',20)->unique();
             $table->foreignId('district_id')->constrained('districts');

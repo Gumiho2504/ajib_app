@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
+use App\Models\District;
+use App\Models\Func;
 use App\Models\Job;
 use Illuminate\Http\Request;
 
@@ -51,9 +54,9 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-//        dump($job);
-//        dump($job->requestments);
-        return view('job.show',['job'=>$job]);
+      //  dump($job);
+
+      return view('job.show',['job'=>$job]);
     }
 
     /**
@@ -79,4 +82,20 @@ class JobController extends Controller
     {
         //
     }
+    public function search(string $cityName){
+
+        $city = City::where('name',$cityName)->get();
+        $districts = $city[0]->districts;
+        $companies = $districts->flatMap(function ($district) {
+            return $district->companies;
+        });
+
+        $jobs= $companies->flatMap(function ($company) {
+            return $company->jobs;
+        });
+
+
+        return view('job.index', compact('jobs'));
+    }
+
 }

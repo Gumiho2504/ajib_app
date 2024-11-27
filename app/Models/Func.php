@@ -12,6 +12,7 @@ class Func extends Model
     public $timestamps = false;
     protected $fillable = [
         'name',
+        'icon',
     ];
 
     public function jobs(): BelongsToMany
